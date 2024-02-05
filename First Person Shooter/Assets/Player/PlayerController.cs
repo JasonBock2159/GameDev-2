@@ -58,7 +58,42 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug
+        debug_text.text = "Wish Dir:" + wish_dir.ToString();
+        debug_text.text += "\nPlayer Velocity:" + player_velocity.ToString();
+        debug_text.text += "\nPlayer Speed:" + new Vector3(player_velocity.x, 0, player_velocity.z).magnitude.ToString();
+        debug_text.text += "\nGrounded" + grounded.ToString();
+
+
+
         Look();
+    }
+
+    private void FixedUpdate()
+    {
+        //Find wish dir
+        wish_dir= transform.right * move_input.x + transform.forward * move_input.y;
+        wish_dir = wish_dir.normalized;
+
+        grounded = character_controller.isGrounded;
+        if (grounded)
+        {
+            player_velocity = MoveGround(wish_dir, player_velocity);
+        }
+        else
+        {
+           player_velocity= MoveAir(wish_dir, player_velocity);
+        }
+        //Gravity
+
+        player_velocity.y -= gravity * Time.deltaTime;
+        if(grounded && player_velocity.y < 0)
+        {
+            player_velocity.y = -2;
+        }
+
+        player_velocity = MoveGround(wish_dir, player_velocity);
+        character_controller.Move(player_velocity * Time.deltaTime);
     }
 
 
@@ -92,7 +127,7 @@ public class PlayerController : MonoBehaviour
     {
         if (grounded)
         {
-            //Do this later
+            player_velocity.y = jump_impulse;
         }
     }
 
@@ -122,7 +157,7 @@ public class PlayerController : MonoBehaviour
         }
         if (speed != 0)
         {
-            float drop =* friction * Time.deltaTime;
+            float drop = speed * friction * Time.deltaTime;
             new_velocity *= Mathf.Max(speed - drop, 0) / speed;
 
         }
