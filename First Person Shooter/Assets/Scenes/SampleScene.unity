@@ -1741,6 +1741,7 @@ GameObject:
   - component: {fileID: 1661480460}
   - component: {fileID: 1661480459}
   - component: {fileID: 1661480458}
+  - component: {fileID: 1661480462}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1787,24 +1788,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1661480459}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: GetLookInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: 338ebf04-48d3-4d3b-bf28-903cec3228e0
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661480459}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1661480462}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
         m_MethodName: GetMoveInput
         m_Mode: 0
         m_Arguments:
@@ -1819,8 +1808,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661480459}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1661480462}
+        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
         m_MethodName: GetJumpInput
         m_Mode: 0
         m_Arguments:
@@ -1850,17 +1839,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 926d6d3935ecc7e4f997de2e81dc5b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug_text: {fileID: 2084081420}
   cam: {fileID: 1101468841}
   invert_x: 0
   invert_y: 0
   sensitivity: 0.43
-  max_speed: 6
-  accelerator: 60
-  gravity: 20
-  stop_speed: 0.5
-  jump_impulse: 10
-  friction: 4
 --- !u!143 &1661480460
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1896,13 +1878,30 @@ Transform:
   m_GameObject: {fileID: 1661480457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15, z: 0}
+  m_LocalPosition: {x: 0, y: 2.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1101468843}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1661480462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661480457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a5534ed461bfe47abd56442bfa7f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug_text: {fileID: 2084081420}
+  character_controller: {fileID: 0}
+  player_velocity: {x: 0, y: 0, z: 0}
+  wish_dir: {x: 0, y: 0, z: 0}
+  jump_button_pressed: 0
 --- !u!1 &1820010264
 GameObject:
   m_ObjectHideFlags: 0
