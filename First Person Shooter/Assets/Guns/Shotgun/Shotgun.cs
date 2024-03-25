@@ -23,6 +23,10 @@ public class Shotgun : Gun
                     {
                         Debug.DrawLine(transform.position, hit.point, Color.green, 0.05f);
                     }
+
+                    //Trails
+                    TrailRenderer trail = Instantiate(bullet_trail,shoot_point.position, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail,dir,hit));
                 }
                 shoot_delay_timer = gun_data.primary_fire_delay;//Delay Shooting
                 primary_fire_is_shooting = false;
@@ -31,6 +35,10 @@ public class Shotgun : Gun
 
                 ammo_in_clip--;
                 if (ammo_in_clip <= 0) ammo_in_clip = gun_data.ammo_per_clip;
+
+                //Muzzle Flash
+
+                muzzle_flash.Play();
 
                 
             }
